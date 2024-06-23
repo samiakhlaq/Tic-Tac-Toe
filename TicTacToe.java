@@ -74,7 +74,7 @@ public class TicTacToe {
                             if(!GameOver)
                             {
                                 CurrentPlayer = CurrentPlayer == PlayerX ? PlayerO : PlayerX;
-                                TextLabel.setText(CurrentPlayer+"'s Turn");
+                                TextLabel.setText(CheckPlayerName(CurrentPlayer, NamePlayerX, NamePlayerO)+"'s Turn");
                                 TextLabel.setForeground(Color.YELLOW);
                             }
                         }
