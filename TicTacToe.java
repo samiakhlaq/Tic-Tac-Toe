@@ -74,7 +74,7 @@ public class TicTacToe {
                             if(!GameOver)
                             {
                                 CurrentPlayer = CurrentPlayer == PlayerX ? PlayerO : PlayerX;
-                                TextLabel.setText(CheckPlayerName(CurrentPlayer, NamePlayerX, NamePlayerO)+"'s Turn");
+                                TextLabel.setText(CheckPlayerName(CurrentPlayer)+"'s Turn");
                                 TextLabel.setForeground(Color.YELLOW);
                             }
                         }
@@ -93,6 +93,16 @@ public class TicTacToe {
             if (Board[row][0].getText() == Board[row][1].getText() &&
             Board[row][1].getText() == Board[row][2].getText())
             {
+                for(int i = 0; i<3; i++)
+                {
+                    for(int j=0; j<3; j++)
+                    {
+                        if(Board[i][j].getText() != "")
+                        {
+                            SetLoser(Board[i][j]);
+                        }
+                    }
+                }
                 for(int i = 0 ; i<3; i++)
                 {
                     SetWinner(Board[row][i]);
@@ -108,6 +118,16 @@ public class TicTacToe {
             if (Board[0][col].getText() == Board[1][col].getText() &&
             Board[1][col].getText() == Board[2][col].getText())
             {
+                for(int i = 0; i<3; i++)
+                {
+                    for(int j=0; j<3; j++)
+                    {
+                        if(Board[i][j].getText() != "")
+                        {
+                            SetLoser(Board[i][j]);
+                        }
+                    }
+                }
                 for(int i = 0 ; i<3; i++)
                 {
                     SetWinner(Board[i][col]);
@@ -121,6 +141,16 @@ public class TicTacToe {
         Board[1][1].getText() == Board[2][2].getText() &&
         Board[0][0].getText() != "")
         {
+            for(int i = 0; i<3; i++)
+                {
+                    for(int j=0; j<3; j++)
+                    {
+                        if(Board[i][j].getText() != "")
+                        {
+                            SetLoser(Board[i][j]);
+                        }
+                    }
+                }
             for(int i = 0 ; i<3; i++)
             {
                 SetWinner(Board[i][i]);
@@ -132,6 +162,16 @@ public class TicTacToe {
         Board[1][1].getText() == Board[2][0].getText() &&
         Board[0][2].getText() != "")
         {
+            for(int i = 0; i<3; i++)
+                {
+                    for(int j=0; j<3; j++)
+                    {
+                        if(Board[i][j].getText() != "")
+                        {
+                            SetLoser(Board[i][j]);
+                        }
+                    }
+                }
             for(int i = 0 ; i<3; i++)
             {
                 SetWinner(Board[i][2-i]);
@@ -155,34 +195,40 @@ public class TicTacToe {
     }
     public void SetWinner(JButton Tiles)
     {
-        Tiles.setBackground(Color.DARK_GRAY);
-        Tiles.setForeground(Color.GREEN);
-        TextLabel.setText("Winner: "+CheckPlayerName(CurrentPlayer, NamePlayerX, NamePlayerO));
+        Tiles.setBackground(Color.GREEN);
+        Tiles.setForeground(Color.BLACK);
+        TextLabel.setText("Winner: "+CheckPlayerName(CurrentPlayer));
         TextLabel.setForeground(Color.GREEN);
+    }
+
+    public void SetLoser(JButton Tiles)
+    {
+        Tiles.setBackground(Color.RED);
+        Tiles.setForeground(Color.BLACK);   
     }
 
     public void SetTie(JButton Tiles)
     {
-        Tiles.setBackground(Color.DARK_GRAY);
-        Tiles.setForeground(Color.ORANGE);
+        Tiles.setBackground(Color.ORANGE);
+        Tiles.setForeground(Color.BLACK);
         TextLabel.setText("Tie!!");
         TextLabel.setForeground(Color.ORANGE);
     }
-    public String CheckPlayerName(String s,String X,String O)
+    public String CheckPlayerName(String s)
     {
-        if(s.equals(X.substring(0,1)))
+        if(s.equals(NamePlayerX.substring(0,1)))
         {
-            return X.toUpperCase();
+            return NamePlayerX.toUpperCase();
         }
         else
         {
-            return O.toUpperCase();
+            return NamePlayerO.toUpperCase();
         }
     }
     
     public String GetInput(int n)
     {
-        return JOptionPane.showInputDialog(null, n+" Non Player Name /Symbol: ", "Symbol Input", JOptionPane.QUESTION_MESSAGE);
+        return JOptionPane.showInputDialog(null,"(" + n+") Player Name / Symbol: ", "Symbol Input", JOptionPane.QUESTION_MESSAGE);
     }
 
 
